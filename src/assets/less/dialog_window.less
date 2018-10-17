@@ -1,0 +1,120 @@
+@import "_colors.less";
+@import "_variables.less";
+
+.dialog {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  -webkit-user-select: none;
+
+  .window-title {
+    padding: 4px 8px;
+    background: @orange;
+    color: @grey;
+    line-height: 2.4em;
+    [loaded] & {
+      transition: background 0.3s ease;
+    }
+  }
+
+  .window-main {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+
+    > .row {
+      flex: 1;
+      flex-direction: column;
+      display: flex;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+    }
+
+    .tabs {
+      overflow: hidden;
+      background: transparent;
+    }
+    .settings-box {
+      padding-top: 14px;
+      flex: 1;
+      overflow: auto;
+      padding: 0 40px;
+    }
+
+    .settings-toggle-hint-label {
+      display: block;
+      font-size: 0.75em;
+      line-height: normal;
+    }
+
+    h5 {
+      margin: 8px 0;
+      font-size: 18px;
+    }
+
+    .color-square-wrapper {
+      text-align: center;
+
+      .color-square {
+        width: 4em;
+        height: 4em;
+        display: inline-block;
+        margin: 0.3em;
+        cursor: pointer;
+
+        &.red {
+          background-color: #f44336;
+        }
+        &.cyan {
+          background-color: #00bcd4;
+        }
+        &.purple {
+          background-color: #9c27b0;
+        }
+        &.lime {
+          background-color: #d4e157;
+        }
+        &.indigo {
+          background-color: #3f51b5;
+        }
+        &.pink {
+          background-color: #e91e63;
+        }
+        &.teal {
+          background-color: #009688;
+        }
+        &.green {
+          background-color: #4caf50;
+        }
+        &.orange {
+          background-color: #ff9800;
+        }
+        &.deep-purple {
+          background-color: #673ab7;
+        }
+      }
+    }
+
+    .eq-slide-con {
+      display: flex;
+
+      label {
+        position: static;
+        margin-top: 12px;
+        -webkit-column-width: 50px;
+      }
+
+      .eq-slide {
+        margin-top: 16px;
+        flex: 1;
+        margin-left: 16px;
+      }
+    }
+  }
+
+  .chrome-picker {
+    height: 100% !important;
+    width: 100% !important;
+  }
+}

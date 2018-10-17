@@ -1,0 +1,48 @@
+// Pre-run
+import chai from 'chai';
+import { givenAsync } from 'mocha-testdata';
+
+// Actual Test Imports
+import { validSongs, invalidSongs } from '../testdata/lyrics';
+
+chai.should();
+
+export default (source, format, name, timeout) => {
+  describe(`with the ${name} Source`, function lyricsSourceTestScope() {
+    if (timeout) {
+      this.timeout(timeout);
+    }
+    givenAsync(...validSongs).it('should resolve when given a valid song object', (done, song) => {
+      source(...format(song))
+        .then((lyrics) => {
+          lyrics.should.be.a('string');
+          done();
+        })
+        .catch((err) => {
+          console.error(err);
+          done(new Error(`Failed to fetch lyrics for song: ${song.title}`));
+        });
+    });
+
+    givenAsync(...invalidSongs).it('should fail when given an invalid song object', (done, song) => {
+      source(...format(song))
+        .then((lyrics) => {
+          lyrics.should.be.equal(null);
+          done();
+        })
+        .catch(() => done());
+    });
+
+    givenAsync(...validSongs).it('should not contain any script tags when resolved', (done, song) => {
+      source(...format(song))
+        .then((lyrics) => {
+          /<script/g.test(lyrics).should.be.equal(false);
+          done();
+        })
+        .catch((err) => {
+          console.error(err);
+          done(new Error('Failed to fetch lyrics in this test'));
+        });
+    });
+  });
+};
